@@ -1,0 +1,43 @@
+.view-history-content {
+    background: #fff !important;
+
+}
+
+.chat-view-xiaoneng-version {
+    display: none !important;
+}
+
+.view-history-angle {
+    background-image: url('../img/chaticon.png') !important;
+}
+
+.chat-view-window-editor textarea {
+    outline: none !important;
+    border: none !important;
+
+}
+
+.chat-view-message-table tr {
+    display: block !important;
+    margin-bottom: 20px !important;
+
+}
+
+.chat-view-message-table tr td:last-child {
+    width: 500px !important;
+}
+
+.chat-view-message-table tr td input, .chat-view-message-table tr td textarea {
+    padding: 2px 8px !important;
+}
+
+.chat-view-message-table tr td textarea {
+    width: 600px;
+}
+
+.chat-view-submit-submit {
+    width: 150px !important;
+    background-color: #52dad0 !important;
+    color: #fff !important;
+    border: 0 !important;
+}

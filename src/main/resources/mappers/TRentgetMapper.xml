@@ -1,0 +1,514 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mappers.TRentgetMapper">
+    <resultMap id="BaseResultMap" type="com.bean.TRentget">
+        <id column="rg_id" jdbcType="INTEGER" property="rgId"/>
+        <result column="rg_name" jdbcType="VARCHAR" property="rgName"/>
+        <result column="rg_phone" jdbcType="VARCHAR" property="rgPhone"/>
+        <result column="rg_title" jdbcType="VARCHAR" property="rgTitle"/>
+        <result column="min_price" jdbcType="DOUBLE" property="minPrice"/>
+        <result column="max_price" jdbcType="DOUBLE" property="maxPrice"/>
+        <result column="live_time" jdbcType="TIMESTAMP" property="liveTime"/>
+        <result column="room_address" jdbcType="VARCHAR" property="roomAddress"/>
+        <result column="room_desc" jdbcType="VARCHAR" property="roomDesc"/>
+        <result column="room_area" jdbcType="INTEGER" property="roomArea"/>
+        <result column="renovationint" jdbcType="INTEGER" property="renovationint"/>
+        <result column="get_status" jdbcType="INTEGER" property="getStatus"/>
+        <result column="get_create_time" jdbcType="TIMESTAMP" property="getCreateTime"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <association property="user" javaType="com.bean.TUser">
+            <id column="id" jdbcType="INTEGER" property="id"/>
+            <result column="username" jdbcType="VARCHAR" property="username"/>
+            <result column="password" jdbcType="VARCHAR" property="password"/>
+            <result column="name" jdbcType="VARCHAR" property="name"/>
+            <result column="phone" jdbcType="VARCHAR" property="phone"/>
+            <result column="sex" jdbcType="INTEGER" property="sex"/>
+            <result column="age" jdbcType="INTEGER" property="age"/>
+            <result column="idcard" jdbcType="VARCHAR" property="idcard"/>
+            <result column="hard_icon" jdbcType="VARCHAR" property="hardIcon"/>
+            <result column="address" jdbcType="VARCHAR" property="address"/>
+            <result column="job" jdbcType="VARCHAR" property="job"/>
+            <result column="is_owner" jdbcType="INTEGER" property="isOwner"/>
+            <result column="status" jdbcType="INTEGER" property="status"/>
+            <result column="lastlogin" jdbcType="TIMESTAMP" property="lastlogin"/>
+            <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        </association>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        rg_id, rg_name, rg_phone, rg_title, min_price, max_price, live_time, room_address,
+        room_desc, room_area, renovationint, get_status, get_create_time, user_id
+    </sql>
+    <select id="selectByExample" parameterType="com.bean.TRentgetExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from t_rentget
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_rentget
+        where rg_id = #{rgId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from t_rentget
+        where rg_id = #{rgId,jdbcType=INTEGER}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.bean.TRentgetExample">
+        delete from t_rentget
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.bean.TRentget">
+        insert into t_rentget (rg_id, rg_name, rg_phone,
+        rg_title, min_price, max_price,
+        live_time, room_address, room_desc,
+        room_area, renovationint, get_status,
+        get_create_time, user_id)
+        values (#{rgId,jdbcType=INTEGER}, #{rgName,jdbcType=VARCHAR}, #{rgPhone,jdbcType=VARCHAR},
+        #{rgTitle,jdbcType=VARCHAR}, #{minPrice,jdbcType=DOUBLE}, #{maxPrice,jdbcType=DOUBLE},
+        #{liveTime,jdbcType=TIMESTAMP}, #{roomAddress,jdbcType=VARCHAR}, #{roomDesc,jdbcType=VARCHAR},
+        #{roomArea,jdbcType=INTEGER}, #{renovationint,jdbcType=INTEGER}, #{getStatus,jdbcType=INTEGER},
+        #{getCreateTime,jdbcType=TIMESTAMP}, #{userId,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" parameterType="com.bean.TRentget">
+        insert into t_rentget
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="rgId != null">
+                rg_id,
+            </if>
+            <if test="rgName != null">
+                rg_name,
+            </if>
+            <if test="rgPhone != null">
+                rg_phone,
+            </if>
+            <if test="rgTitle != null">
+                rg_title,
+            </if>
+            <if test="minPrice != null">
+                min_price,
+            </if>
+            <if test="maxPrice != null">
+                max_price,
+            </if>
+            <if test="liveTime != null">
+                live_time,
+            </if>
+            <if test="roomAddress != null">
+                room_address,
+            </if>
+            <if test="roomDesc != null">
+                room_desc,
+            </if>
+            <if test="roomArea != null">
+                room_area,
+            </if>
+            <if test="renovationint != null">
+                renovationint,
+            </if>
+            <if test="getStatus != null">
+                get_status,
+            </if>
+            <if test="getCreateTime != null">
+                get_create_time,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="rgId != null">
+                #{rgId,jdbcType=INTEGER},
+            </if>
+            <if test="rgName != null">
+                #{rgName,jdbcType=VARCHAR},
+            </if>
+            <if test="rgPhone != null">
+                #{rgPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="rgTitle != null">
+                #{rgTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="minPrice != null">
+                #{minPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="maxPrice != null">
+                #{maxPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="liveTime != null">
+                #{liveTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="roomAddress != null">
+                #{roomAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="roomDesc != null">
+                #{roomDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="roomArea != null">
+                #{roomArea,jdbcType=INTEGER},
+            </if>
+            <if test="renovationint != null">
+                #{renovationint,jdbcType=INTEGER},
+            </if>
+            <if test="getStatus != null">
+                #{getStatus,jdbcType=INTEGER},
+            </if>
+            <if test="getCreateTime != null">
+                #{getCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.bean.TRentgetExample" resultType="java.lang.Long">
+        select count(*) from t_rentget
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update t_rentget
+        <set>
+            <if test="record.rgId != null">
+                rg_id = #{record.rgId,jdbcType=INTEGER},
+            </if>
+            <if test="record.rgName != null">
+                rg_name = #{record.rgName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.rgPhone != null">
+                rg_phone = #{record.rgPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="record.rgTitle != null">
+                rg_title = #{record.rgTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="record.minPrice != null">
+                min_price = #{record.minPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="record.maxPrice != null">
+                max_price = #{record.maxPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="record.liveTime != null">
+                live_time = #{record.liveTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.roomAddress != null">
+                room_address = #{record.roomAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="record.roomDesc != null">
+                room_desc = #{record.roomDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.roomArea != null">
+                room_area = #{record.roomArea,jdbcType=INTEGER},
+            </if>
+            <if test="record.renovationint != null">
+                renovationint = #{record.renovationint,jdbcType=INTEGER},
+            </if>
+            <if test="record.getStatus != null">
+                get_status = #{record.getStatus,jdbcType=INTEGER},
+            </if>
+            <if test="record.getCreateTime != null">
+                get_create_time = #{record.getCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.userId != null">
+                user_id = #{record.userId,jdbcType=INTEGER},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update t_rentget
+        set rg_id = #{record.rgId,jdbcType=INTEGER},
+        rg_name = #{record.rgName,jdbcType=VARCHAR},
+        rg_phone = #{record.rgPhone,jdbcType=VARCHAR},
+        rg_title = #{record.rgTitle,jdbcType=VARCHAR},
+        min_price = #{record.minPrice,jdbcType=DOUBLE},
+        max_price = #{record.maxPrice,jdbcType=DOUBLE},
+        live_time = #{record.liveTime,jdbcType=TIMESTAMP},
+        room_address = #{record.roomAddress,jdbcType=VARCHAR},
+        room_desc = #{record.roomDesc,jdbcType=VARCHAR},
+        room_area = #{record.roomArea,jdbcType=INTEGER},
+        renovationint = #{record.renovationint,jdbcType=INTEGER},
+        get_status = #{record.getStatus,jdbcType=INTEGER},
+        get_create_time = #{record.getCreateTime,jdbcType=TIMESTAMP},
+        user_id = #{record.userId,jdbcType=INTEGER}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.bean.TRentget">
+        update t_rentget
+        <set>
+            <if test="rgName != null">
+                rg_name = #{rgName,jdbcType=VARCHAR},
+            </if>
+            <if test="rgPhone != null">
+                rg_phone = #{rgPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="rgTitle != null">
+                rg_title = #{rgTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="minPrice != null">
+                min_price = #{minPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="maxPrice != null">
+                max_price = #{maxPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="liveTime != null">
+                live_time = #{liveTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="roomAddress != null">
+                room_address = #{roomAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="roomDesc != null">
+                room_desc = #{roomDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="roomArea != null">
+                room_area = #{roomArea,jdbcType=INTEGER},
+            </if>
+            <if test="renovationint != null">
+                renovationint = #{renovationint,jdbcType=INTEGER},
+            </if>
+            <if test="getStatus != null">
+                get_status = #{getStatus,jdbcType=INTEGER},
+            </if>
+            <if test="getCreateTime != null">
+                get_create_time = #{getCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+        </set>
+        where rg_id = #{rgId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.bean.TRentget">
+        update t_rentget
+        set rg_name = #{rgName,jdbcType=VARCHAR},
+        rg_phone = #{rgPhone,jdbcType=VARCHAR},
+        rg_title = #{rgTitle,jdbcType=VARCHAR},
+        min_price = #{minPrice,jdbcType=DOUBLE},
+        max_price = #{maxPrice,jdbcType=DOUBLE},
+        live_time = #{liveTime,jdbcType=TIMESTAMP},
+        room_address = #{roomAddress,jdbcType=VARCHAR},
+        room_desc = #{roomDesc,jdbcType=VARCHAR},
+        room_area = #{roomArea,jdbcType=INTEGER},
+        renovationint = #{renovationint,jdbcType=INTEGER},
+        get_status = #{getStatus,jdbcType=INTEGER},
+        get_create_time = #{getCreateTime,jdbcType=TIMESTAMP},
+        user_id = #{userId,jdbcType=INTEGER}
+        where rg_id = #{rgId,jdbcType=INTEGER}
+    </update>
+
+    <select id="selectAllByParams" resultMap="BaseResultMap"
+            parameterType="Map">
+        SELECT
+        u.*,rg.*
+        FROM
+        t_rentget rg
+
+        left join t_user u on rg.user_id=u.id
+
+        <where>
+            <if test=" param.Info!= null and  param.Info!= ''">
+                AND rg.rg_title like CONCAT('%',#{param.Info,jdbcType=VARCHAR},'%')
+                or rg.room_desc like CONCAT('%',#{param.Info,jdbcType=VARCHAR},'%')
+
+            </if>
+            <if test="param.roomAddress!= null and  param.roomAddress!= ''">
+                AND rg.room_address like CONCAT('%',#{param.roomAddress,jdbcType=VARCHAR},'%')
+            </if>
+            <if test=" param.rgPhone!= null and  param.rgPhone!= ''">
+                AND rg.rg_phone = #{param.rgPhone,jdbcType=VARCHAR}
+            </if>
+            <if test=" param.userName!= null and  param.userName!= ''">
+                AND u.name = #{param.userName,jdbcType=VARCHAR}
+            </if>
+            <if test="param.rgName !=null and param.rgName!=''">
+                AND rg.rg_name = #{param.rgName,jdbcType=VARCHAR}
+            </if>
+
+            <if test="param.getStatus !=null and param.getStatus!=''">
+                AND rg.get_status = #{param.getStatus}
+            </if>
+
+            <if test="param.minPriceBegin != null and param.minPriceBegin!=''">
+                AND rg.min_price <![CDATA[>=]]> #{param.minPriceBegin}
+            </if>
+            <if test="param.minPriceEnd != null and param.minPriceEnd!=''">
+                AND rg.min_price <![CDATA[<=]]> #{param.minPriceEnd}
+            </if>
+            <if test="param.maxPriceBegin != null and param.maxPriceBegin!=''">
+                AND rg.max_price <![CDATA[>=]]> #{param.maxPriceBegin}
+            </if>
+            <if test="param.maxPriceEnd != null and param.maxPriceEnd!=''">
+                AND rg.max_price <![CDATA[<=]]> #{param.maxPriceEnd}
+            </if>
+            <if test="param.startTime!=null and param.startTime!=''">
+                <![CDATA[  AND DATE_FORMAT(rg.get_create_time, '%Y-%m-%d %T:%i:%s') >= DATE_FORMAT(#{param.startTime}, '%Y-%m-%d %T:%i:%s')   ]]>
+            </if>
+            <if test="param.endTime!=null and param.endTime!=''">
+                <![CDATA[  AND DATE_FORMAT(rg.get_create_time, '%Y-%m-%d %T:%i:%s') <= DATE_FORMAT(#{param.endTime}, '%Y-%m-%d %T:%i:%s')   ]]>
+            </if>
+
+            <if test="param.startLiveTime!=null and param.startLiveTime!=''">
+                <![CDATA[  AND DATE_FORMAT(rg.live_time, '%Y-%m-%d %T:%i:%s') >= DATE_FORMAT(#{param.startLiveTime}, '%Y-%m-%d %T:%i:%s')   ]]>
+            </if>
+            <if test="param.endLiveTime!=null and param.endLiveTime!=''">
+                <![CDATA[  AND DATE_FORMAT(rg.live_time, '%Y-%m-%d %T:%i:%s') <= DATE_FORMAT(#{param.endLiveTime}, '%Y-%m-%d %T:%i:%s')   ]]>
+            </if>
+
+        </where>
+
+        ORDER by rg.get_create_time desc
+
+    </select>
+
+
+    <select id="selectByrgId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        SELECT
+        u.*,rg.*
+        FROM
+        t_rentget rg
+
+        left join t_user u on rg.user_id=u.id
+        where rg.rg_id = #{rgId,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectByParams" resultMap="BaseResultMap"
+            parameterType="Map">
+        SELECT
+        u.*,rg.*
+        FROM
+        t_rentget rg
+
+        left join t_user u on rg.user_id=u.id
+
+        <where>
+            <if test=" param.Info!= null and  param.Info!= ''">
+                AND rg.rg_title like CONCAT('%',#{param.Info,jdbcType=VARCHAR},'%')
+                or rg.room_desc like CONCAT('%',#{param.Info,jdbcType=VARCHAR},'%')
+
+            </if>
+            <if test="param.roomAddress!= null and  param.roomAddress!= ''">
+                AND rg.room_address like CONCAT('%',#{param.roomAddress,jdbcType=VARCHAR},'%')
+            </if>
+            <if test=" param.rgPhone!= null and  param.rgPhone!= ''">
+                AND rg.rg_phone = #{param.rgPhone,jdbcType=VARCHAR}
+            </if>
+            <if test=" param.userName!= null and  param.userName!= ''">
+                AND u.name = #{param.userName,jdbcType=VARCHAR}
+            </if>
+            <if test="param.rgName !=null and param.rgName!=''">
+                AND rg.rg_name = #{param.rgName,jdbcType=VARCHAR}
+            </if>
+
+            <if test="param.getStatus !=null and param.getStatus!=''">
+                AND rg.get_status = #{param.getStatus}
+            </if>
+
+            <if test=" param.minPriceBegin != null and param.minPriceBegin!=''">
+                AND rg.min_price &gt;= #{param.minPriceBegin}
+            </if>
+            <if test=" param.minPriceEnd != null and param.minPriceEnd!=''">
+                AND rg.min_price &lt;= #{param.minPriceEnd}
+            </if>
+
+            <if test="param.maxPriceBegin != null and param.maxPriceBegin !=''">
+                AND rg.max_price &gt;= #{param.maxPriceBegin}
+            </if>
+            <if test="param.maxPriceEnd != null and param.maxPriceEnd !=''">
+                AND rg.max_price &lt;= #{param.maxPriceEnd}
+            </if>
+            <if test="param.startTime !=null and param.startTime !=''">
+                <![CDATA[  AND DATE_FORMAT(rg.get_create_time, '%Y-%m-%d %T:%i:%s') >= DATE_FORMAT(#{param.startTime}, '%Y-%m-%d %T:%i:%s')   ]]>
+            </if>
+            <if test="param.endTime !=null and param.endTime !=''">
+                <![CDATA[  AND DATE_FORMAT(rg.get_create_time, '%Y-%m-%d %T:%i:%s') <= DATE_FORMAT(#{param.endTime}, '%Y-%m-%d %T:%i:%s')   ]]>
+            </if>
+
+            <if test="param.startLiveTime!=null and param.startLiveTime!=''">
+                <![CDATA[  AND DATE_FORMAT(rg.live_time, '%Y-%m-%d %T:%i:%s') >= DATE_FORMAT(#{param.startLiveTime}, '%Y-%m-%d %T:%i:%s')   ]]>
+            </if>
+            <if test="param.endLiveTime!=null and param.endLiveTime!=''">
+                <![CDATA[  AND DATE_FORMAT(rg.live_time, '%Y-%m-%d %T:%i:%s') <= DATE_FORMAT(#{param.endLiveTime}, '%Y-%m-%d %T:%i:%s')   ]]>
+            </if>
+
+        </where>
+
+        ORDER by rg.get_create_time desc
+
+    </select>
+
+
+</mapper>

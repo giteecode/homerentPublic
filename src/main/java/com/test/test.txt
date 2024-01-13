@@ -1,0 +1,32 @@
+  <select id="selectByLike" parameterType="map" resultType="BaseResultMap">
+    SELECT
+    u.*,rout.*,rget.*
+    FROM
+    t_user u
+    left join t_rentout rout on rout.user_id=u.id
+    left join t_rentget rget on rget.user_id=u.id
+    <where>
+      <if test=" param.Info!= null and  param.Info!= ''">
+        AND u.address like CONCAT('%',#{param.Info},'%')
+        or u.name like CONCAT('%',#{param.Info},'%')
+      </if>
+      <if test="param.uid !=null and param.uid!=''">
+        and u.id = #{param.uid}
+      </if>
+      <if test="param.sex !=null and param.sex!=''">
+        and u.sex = #{param.sex}
+      </if>
+      <if test="param.idCard !=null and param.idCard!=''">
+        and u.id_card = #{param.idCard}
+      </if>
+      <if test="param.deptId !=null and param.deptId!=''">
+        and u.dept_id = #{param.deptId}
+      </if>
+      <if test="param.createName !=null and param.createName!=''">
+        and u.create_name = #{param.createName}
+      </if>
+
+    </where>
+
+
+  </select>

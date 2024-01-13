@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mappers.TUserMapper">
+    <resultMap id="BaseResultMap" type="com.bean.TUser">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="sex" jdbcType="INTEGER" property="sex"/>
+        <result column="age" jdbcType="INTEGER" property="age"/>
+        <result column="idcard" jdbcType="VARCHAR" property="idcard"/>
+        <result column="hard_icon" jdbcType="VARCHAR" property="hardIcon"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="job" jdbcType="VARCHAR" property="job"/>
+        <result column="is_owner" jdbcType="INTEGER" property="isOwner"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="lastlogin" jdbcType="TIMESTAMP" property="lastlogin"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <collection property="rentgets" javaType="List" ofType="com.bean.TRentget">
+            <id column="rg_id" jdbcType="INTEGER" property="rgId"/>
+            <result column="rg_name" jdbcType="VARCHAR" property="rgName"/>
+            <result column="rg_phone" jdbcType="VARCHAR" property="rgPhone"/>
+            <result column="rg_title" jdbcType="VARCHAR" property="rgTitle"/>
+            <result column="min_price" jdbcType="DOUBLE" property="minPrice"/>
+            <result column="max_price" jdbcType="DOUBLE" property="maxPrice"/>
+            <result column="live_time" jdbcType="TIMESTAMP" property="liveTime"/>
+            <result column="room_address" jdbcType="VARCHAR" property="roomAddress"/>
+            <result column="room_desc" jdbcType="VARCHAR" property="roomDesc"/>
+            <result column="room_area" jdbcType="INTEGER" property="roomArea"/>
+            <result column="renovationint" jdbcType="INTEGER" property="renovationint"/>
+            <result column="get_status" jdbcType="INTEGER" property="getStatus"/>
+            <result column="get_create_time" jdbcType="TIMESTAMP" property="getCreateTime"/>
+            <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        </collection>
+        <collection property="rentouts" javaType="List" ofType="com.bean.TRentout">
+            <id column="rg_id" jdbcType="INTEGER" property="rgId"/>
+            <result column="rg_name" jdbcType="VARCHAR" property="rgName"/>
+            <result column="rg_phone" jdbcType="VARCHAR" property="rgPhone"/>
+            <result column="room_address" jdbcType="VARCHAR" property="roomAddress"/>
+            <result column="room_price" jdbcType="DOUBLE" property="roomPrice"/>
+            <result column="is_floor" jdbcType="INTEGER" property="isFloor"/>
+            <result column="all_floor" jdbcType="INTEGER" property="allFloor"/>
+            <result column="room_age" jdbcType="INTEGER" property="roomAge"/>
+            <result column="room_structure" jdbcType="VARCHAR" property="roomStructure"/>
+            <result column="room_desc" jdbcType="VARCHAR" property="roomDesc"/>
+            <result column="room_area" jdbcType="INTEGER" property="roomArea"/>
+            <result column="renovationint" jdbcType="INTEGER" property="renovationint"/>
+            <result column="room_picture" jdbcType="VARCHAR" property="roomPicture"/>
+            <result column="out_status" jdbcType="INTEGER" property="outStatus"/>
+            <result column="out_create_time" jdbcType="TIMESTAMP" property="outCreateTime"/>
+            <result column="isqualified" jdbcType="INTEGER" property="isqualified"/>
+            <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        </collection>
+        <collection property="messages" javaType="List" ofType="com.bean.TMessage">
+            <id column="message_id" jdbcType="INTEGER" property="messageId"/>
+            <result column="create_name" jdbcType="VARCHAR" property="createName"/>
+            <result column="title" jdbcType="VARCHAR" property="title"/>
+            <result column="content" jdbcType="VARCHAR" property="content"/>
+            <result column="m_phone" jdbcType="VARCHAR" property="mPhone"/>
+            <result column="m_status" jdbcType="INTEGER" property="mStatus"/>
+            <result column="m_create_time" jdbcType="TIMESTAMP" property="mCreateTime"/>
+            <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        </collection>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        id, username, password, name, phone, sex, age, idcard, hard_icon, address, job, is_owner,
+        status, lastlogin, create_time
+    </sql>
+    <select id="selectByExample" parameterType="com.bean.TUserExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from t_user
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_user
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from t_user
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.bean.TUserExample">
+        delete from t_user
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.bean.TUser">
+        insert into t_user (id, username, password,
+        name, phone, sex, age,
+        idcard, hard_icon, address,
+        job, is_owner, status,
+        lastlogin, create_time)
+        values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+        #{name,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, #{age,jdbcType=INTEGER},
+        #{idcard,jdbcType=VARCHAR}, #{hardIcon,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR},
+        #{job,jdbcType=VARCHAR}, #{isOwner,jdbcType=INTEGER}, #{status,jdbcType=INTEGER},
+        #{lastlogin,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="com.bean.TUser">
+        insert into t_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="username != null">
+                username,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="sex != null">
+                sex,
+            </if>
+            <if test="age != null">
+                age,
+            </if>
+            <if test="idcard != null">
+                idcard,
+            </if>
+            <if test="hardIcon != null">
+                hard_icon,
+            </if>
+            <if test="address != null">
+                address,
+            </if>
+            <if test="job != null">
+                job,
+            </if>
+            <if test="isOwner != null">
+                is_owner,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="lastlogin != null">
+                lastlogin,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="username != null">
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                #{sex,jdbcType=INTEGER},
+            </if>
+            <if test="age != null">
+                #{age,jdbcType=INTEGER},
+            </if>
+            <if test="idcard != null">
+                #{idcard,jdbcType=VARCHAR},
+            </if>
+            <if test="hardIcon != null">
+                #{hardIcon,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="job != null">
+                #{job,jdbcType=VARCHAR},
+            </if>
+            <if test="isOwner != null">
+                #{isOwner,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="lastlogin != null">
+                #{lastlogin,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.bean.TUserExample" resultType="java.lang.Long">
+        select count(*) from t_user
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update t_user
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.username != null">
+                username = #{record.username,jdbcType=VARCHAR},
+            </if>
+            <if test="record.password != null">
+                password = #{record.password,jdbcType=VARCHAR},
+            </if>
+            <if test="record.name != null">
+                name = #{record.name,jdbcType=VARCHAR},
+            </if>
+            <if test="record.phone != null">
+                phone = #{record.phone,jdbcType=VARCHAR},
+            </if>
+            <if test="record.sex != null">
+                sex = #{record.sex,jdbcType=INTEGER},
+            </if>
+            <if test="record.age != null">
+                age = #{record.age,jdbcType=INTEGER},
+            </if>
+            <if test="record.idcard != null">
+                idcard = #{record.idcard,jdbcType=VARCHAR},
+            </if>
+            <if test="record.hardIcon != null">
+                hard_icon = #{record.hardIcon,jdbcType=VARCHAR},
+            </if>
+            <if test="record.address != null">
+                address = #{record.address,jdbcType=VARCHAR},
+            </if>
+            <if test="record.job != null">
+                job = #{record.job,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isOwner != null">
+                is_owner = #{record.isOwner,jdbcType=INTEGER},
+            </if>
+            <if test="record.status != null">
+                status = #{record.status,jdbcType=INTEGER},
+            </if>
+            <if test="record.lastlogin != null">
+                lastlogin = #{record.lastlogin,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.createTime != null">
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update t_user
+        set id = #{record.id,jdbcType=INTEGER},
+        username = #{record.username,jdbcType=VARCHAR},
+        password = #{record.password,jdbcType=VARCHAR},
+        name = #{record.name,jdbcType=VARCHAR},
+        phone = #{record.phone,jdbcType=VARCHAR},
+        sex = #{record.sex,jdbcType=INTEGER},
+        age = #{record.age,jdbcType=INTEGER},
+        idcard = #{record.idcard,jdbcType=VARCHAR},
+        hard_icon = #{record.hardIcon,jdbcType=VARCHAR},
+        address = #{record.address,jdbcType=VARCHAR},
+        job = #{record.job,jdbcType=VARCHAR},
+        is_owner = #{record.isOwner,jdbcType=INTEGER},
+        status = #{record.status,jdbcType=INTEGER},
+        lastlogin = #{record.lastlogin,jdbcType=TIMESTAMP},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.bean.TUser">
+        update t_user
+        <set>
+            <if test="username != null">
+                username = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                sex = #{sex,jdbcType=INTEGER},
+            </if>
+            <if test="age != null">
+                age = #{age,jdbcType=INTEGER},
+            </if>
+            <if test="idcard != null">
+                idcard = #{idcard,jdbcType=VARCHAR},
+            </if>
+            <if test="hardIcon != null">
+                hard_icon = #{hardIcon,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="job != null">
+                job = #{job,jdbcType=VARCHAR},
+            </if>
+            <if test="isOwner != null">
+                is_owner = #{isOwner,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="lastlogin != null">
+                lastlogin = #{lastlogin,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.bean.TUser">
+        update t_user
+        set username = #{username,jdbcType=VARCHAR},
+        password = #{password,jdbcType=VARCHAR},
+        name = #{name,jdbcType=VARCHAR},
+        phone = #{phone,jdbcType=VARCHAR},
+        sex = #{sex,jdbcType=INTEGER},
+        age = #{age,jdbcType=INTEGER},
+        idcard = #{idcard,jdbcType=VARCHAR},
+        hard_icon = #{hardIcon,jdbcType=VARCHAR},
+        address = #{address,jdbcType=VARCHAR},
+        job = #{job,jdbcType=VARCHAR},
+        is_owner = #{isOwner,jdbcType=INTEGER},
+        status = #{status,jdbcType=INTEGER},
+        lastlogin = #{lastlogin,jdbcType=TIMESTAMP},
+        create_time = #{createTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <select id="checkUsername" parameterType="java.lang.String" resultMap="BaseResultMap">
+
+        select
+        *
+        from t_user
+        where username = #{username,jdbcType=VARCHAR}
+
+    </select>
+
+    <select id="selectAllByParams" resultMap="BaseResultMap"
+            parameterType="Map">
+        SELECT
+        *
+        FROM
+        t_user u
+        -- left join t_rentget rg on rg.user_id=u.id
+        -- left join t_rentout ro on ro.user_id=u.id
+        -- left join t_message message on message.user_id=u.id
+        <where>
+            <if test=" param.Info!= null and  param.Info!= ''">
+                AND u.address like CONCAT('%',#{param.Info,jdbcType=VARCHAR},'%')
+                or u.name like CONCAT('%',#{param.Info,jdbcType=VARCHAR},'%')
+                or u.job like CONCAT('%',#{param.Info,jdbcType=VARCHAR},'%')
+            </if>
+            <if test=" param.usernameOrphone!= null and  param.usernameOrphone!= ''">
+                AND u.username = #{param.usernameOrphone,jdbcType=VARCHAR}
+                or u.phone = #{param.usernameOrphone,jdbcType=VARCHAR}
+
+            </if>
+            <if test="param.uid !=null and param.uid!=''">
+                and u.age = #{param.age,jdbcType=INTEGER}
+            </if>
+            <if test="param.sex !=null and param.sex!=''">
+                and u.sex = #{param.sex,jdbcType=INTEGER}
+            </if>
+            <if test="param.idCard !=null and param.idCard!=''">
+                and u.idcard = #{param.idCard,jdbcType=VARCHAR}
+            </if>
+            <if test="param.isOwner !=null and param.deptId!=''">
+                and u.is_owner = #{param.isOwner,jdbcType=INTEGER}
+            </if>
+            <if test="param.status !=null and param.status!=''">
+                and u.status = #{param.status,jdbcType=INTEGER}
+            </if>
+            <if test="param.startTime!=null and param.startTime!=''">
+                <![CDATA[  and DATE_FORMAT(u.create_time, '%Y-%m-%d %T:%i:%s') >= DATE_FORMAT(#{param.startTime}, '%Y-%m-%d %T:%i:%s')   ]]>
+            </if>
+            <if test="param.endTime!=null and param.endTime!=''">
+                <![CDATA[  and DATE_FORMAT(u.create_time, '%Y-%m-%d %T:%i:%s') <= DATE_FORMAT(#{param.endTime}, '%Y-%m-%d %T:%i:%s')   ]]>
+            </if>
+        </where>
+        ORDER BY u.create_time desc
+    </select>
+
+    <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        SELECT
+        u.*,rg.*
+        FROM
+        t_user u
+        left join t_rentget rg on rg.user_id=u.id
+        where u.id = #{id,jdbcType=INTEGER}
+        ORDER BY rg.get_create_time desc
+    </select>
+
+    <select id="selectById2RentOut" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        SELECT
+        u.*,ro.*
+        FROM
+        t_user u
+
+        left join t_rentout ro on ro.user_id=u.id
+        where u.id = #{id,jdbcType=INTEGER}
+        ORDER BY ro.out_create_time desc
+    </select>
+
+    <select id="selectById2Message" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        SELECT
+        u.*,mess.*
+        FROM
+        t_user u
+        left join t_message mess on mess.user_id=u.id
+        where u.id = #{id,jdbcType=INTEGER}
+        ORDER BY mess.m_create_time desc
+    </select>
+
+</mapper>

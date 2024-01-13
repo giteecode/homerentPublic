@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mappers.TContractMapper">
+    <resultMap id="BaseResultMap" type="com.bean.TContract">
+        <id column="con_num" jdbcType="INTEGER" property="conNum"/>
+        <result column="con_address" jdbcType="VARCHAR" property="conAddress"/>
+        <result column="con_time" jdbcType="VARCHAR" property="conTime"/>
+        <result column="start_time" jdbcType="TIMESTAMP" property="startTime"/>
+        <result column="end_time" jdbcType="TIMESTAMP" property="endTime"/>
+        <result column="pay_time" jdbcType="TIMESTAMP" property="payTime"/>
+        <result column="month_money" jdbcType="DECIMAL" property="monthMoney"/>
+        <result column="total_money" jdbcType="DECIMAL" property="totalMoney"/>
+        <result column="deposit" jdbcType="DECIMAL" property="deposit"/>
+        <result column="first_party" jdbcType="VARCHAR" property="firstParty"/>
+        <result column="first_phone" jdbcType="VARCHAR" property="firstPhone"/>
+        <result column="second_party" jdbcType="VARCHAR" property="secondParty"/>
+        <result column="second_phone" jdbcType="VARCHAR" property="secondPhone"/>
+        <result column="con_status" jdbcType="INTEGER" property="conStatus"/>
+        <result column="con_create_time" jdbcType="TIMESTAMP" property="conCreateTime"/>
+        <result column="first_id" jdbcType="INTEGER" property="firstId"/>
+        <result column="second_id" jdbcType="INTEGER" property="secondId"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="rentout_id" jdbcType="INTEGER" property="rentoutId"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        con_num, con_address, con_time, start_time, end_time, pay_time, month_money, total_money,
+        deposit, first_party, first_phone, second_party, second_phone, con_status, con_create_time,
+        first_id, second_id, user_id, rentout_id
+    </sql>
+    <select id="selectByExample" parameterType="com.bean.TContractExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from t_contract
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_contract
+        where con_num = #{conNum,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from t_contract
+        where con_num = #{conNum,jdbcType=INTEGER}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.bean.TContractExample">
+        delete from t_contract
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.bean.TContract">
+        insert into t_contract (con_num, con_address, con_time,
+        start_time, end_time, pay_time,
+        month_money, total_money, deposit,
+        first_party, first_phone, second_party,
+        second_phone, con_status, con_create_time,
+        first_id, second_id, user_id,
+        rentout_id)
+        values (#{conNum,jdbcType=INTEGER}, #{conAddress,jdbcType=VARCHAR}, #{conTime,jdbcType=VARCHAR},
+        #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{payTime,jdbcType=TIMESTAMP},
+        #{monthMoney,jdbcType=DECIMAL}, #{totalMoney,jdbcType=DECIMAL}, #{deposit,jdbcType=DECIMAL},
+        #{firstParty,jdbcType=VARCHAR}, #{firstPhone,jdbcType=VARCHAR}, #{secondParty,jdbcType=VARCHAR},
+        #{secondPhone,jdbcType=VARCHAR}, #{conStatus,jdbcType=INTEGER}, #{conCreateTime,jdbcType=TIMESTAMP},
+        #{firstId,jdbcType=INTEGER}, #{secondId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER},
+        #{rentoutId,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" parameterType="com.bean.TContract">
+        insert into t_contract
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="conNum != null">
+                con_num,
+            </if>
+            <if test="conAddress != null">
+                con_address,
+            </if>
+            <if test="conTime != null">
+                con_time,
+            </if>
+            <if test="startTime != null">
+                start_time,
+            </if>
+            <if test="endTime != null">
+                end_time,
+            </if>
+            <if test="payTime != null">
+                pay_time,
+            </if>
+            <if test="monthMoney != null">
+                month_money,
+            </if>
+            <if test="totalMoney != null">
+                total_money,
+            </if>
+            <if test="deposit != null">
+                deposit,
+            </if>
+            <if test="firstParty != null">
+                first_party,
+            </if>
+            <if test="firstPhone != null">
+                first_phone,
+            </if>
+            <if test="secondParty != null">
+                second_party,
+            </if>
+            <if test="secondPhone != null">
+                second_phone,
+            </if>
+            <if test="conStatus != null">
+                con_status,
+            </if>
+            <if test="conCreateTime != null">
+                con_create_time,
+            </if>
+            <if test="firstId != null">
+                first_id,
+            </if>
+            <if test="secondId != null">
+                second_id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="rentoutId != null">
+                rentout_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="conNum != null">
+                #{conNum,jdbcType=INTEGER},
+            </if>
+            <if test="conAddress != null">
+                #{conAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="conTime != null">
+                #{conTime,jdbcType=VARCHAR},
+            </if>
+            <if test="startTime != null">
+                #{startTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endTime != null">
+                #{endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="payTime != null">
+                #{payTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="monthMoney != null">
+                #{monthMoney,jdbcType=DECIMAL},
+            </if>
+            <if test="totalMoney != null">
+                #{totalMoney,jdbcType=DECIMAL},
+            </if>
+            <if test="deposit != null">
+                #{deposit,jdbcType=DECIMAL},
+            </if>
+            <if test="firstParty != null">
+                #{firstParty,jdbcType=VARCHAR},
+            </if>
+            <if test="firstPhone != null">
+                #{firstPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="secondParty != null">
+                #{secondParty,jdbcType=VARCHAR},
+            </if>
+            <if test="secondPhone != null">
+                #{secondPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="conStatus != null">
+                #{conStatus,jdbcType=INTEGER},
+            </if>
+            <if test="conCreateTime != null">
+                #{conCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="firstId != null">
+                #{firstId,jdbcType=INTEGER},
+            </if>
+            <if test="secondId != null">
+                #{secondId,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="rentoutId != null">
+                #{rentoutId,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.bean.TContractExample" resultType="java.lang.Long">
+        select count(*) from t_contract
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update t_contract
+        <set>
+            <if test="record.conNum != null">
+                con_num = #{record.conNum,jdbcType=INTEGER},
+            </if>
+            <if test="record.conAddress != null">
+                con_address = #{record.conAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="record.conTime != null">
+                con_time = #{record.conTime,jdbcType=VARCHAR},
+            </if>
+            <if test="record.startTime != null">
+                start_time = #{record.startTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.endTime != null">
+                end_time = #{record.endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.payTime != null">
+                pay_time = #{record.payTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.monthMoney != null">
+                month_money = #{record.monthMoney,jdbcType=DECIMAL},
+            </if>
+            <if test="record.totalMoney != null">
+                total_money = #{record.totalMoney,jdbcType=DECIMAL},
+            </if>
+            <if test="record.deposit != null">
+                deposit = #{record.deposit,jdbcType=DECIMAL},
+            </if>
+            <if test="record.firstParty != null">
+                first_party = #{record.firstParty,jdbcType=VARCHAR},
+            </if>
+            <if test="record.firstPhone != null">
+                first_phone = #{record.firstPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="record.secondParty != null">
+                second_party = #{record.secondParty,jdbcType=VARCHAR},
+            </if>
+            <if test="record.secondPhone != null">
+                second_phone = #{record.secondPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="record.conStatus != null">
+                con_status = #{record.conStatus,jdbcType=INTEGER},
+            </if>
+            <if test="record.conCreateTime != null">
+                con_create_time = #{record.conCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.firstId != null">
+                first_id = #{record.firstId,jdbcType=INTEGER},
+            </if>
+            <if test="record.secondId != null">
+                second_id = #{record.secondId,jdbcType=INTEGER},
+            </if>
+            <if test="record.userId != null">
+                user_id = #{record.userId,jdbcType=INTEGER},
+            </if>
+            <if test="record.rentoutId != null">
+                rentout_id = #{record.rentoutId,jdbcType=INTEGER},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update t_contract
+        set con_num = #{record.conNum,jdbcType=INTEGER},
+        con_address = #{record.conAddress,jdbcType=VARCHAR},
+        con_time = #{record.conTime,jdbcType=VARCHAR},
+        start_time = #{record.startTime,jdbcType=TIMESTAMP},
+        end_time = #{record.endTime,jdbcType=TIMESTAMP},
+        pay_time = #{record.payTime,jdbcType=TIMESTAMP},
+        month_money = #{record.monthMoney,jdbcType=DECIMAL},
+        total_money = #{record.totalMoney,jdbcType=DECIMAL},
+        deposit = #{record.deposit,jdbcType=DECIMAL},
+        first_party = #{record.firstParty,jdbcType=VARCHAR},
+        first_phone = #{record.firstPhone,jdbcType=VARCHAR},
+        second_party = #{record.secondParty,jdbcType=VARCHAR},
+        second_phone = #{record.secondPhone,jdbcType=VARCHAR},
+        con_status = #{record.conStatus,jdbcType=INTEGER},
+        con_create_time = #{record.conCreateTime,jdbcType=TIMESTAMP},
+        first_id = #{record.firstId,jdbcType=INTEGER},
+        second_id = #{record.secondId,jdbcType=INTEGER},
+        user_id = #{record.userId,jdbcType=INTEGER},
+        rentout_id = #{record.rentoutId,jdbcType=INTEGER}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.bean.TContract">
+        update t_contract
+        <set>
+            <if test="conAddress != null">
+                con_address = #{conAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="conTime != null">
+                con_time = #{conTime,jdbcType=VARCHAR},
+            </if>
+            <if test="startTime != null">
+                start_time = #{startTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endTime != null">
+                end_time = #{endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="payTime != null">
+                pay_time = #{payTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="monthMoney != null">
+                month_money = #{monthMoney,jdbcType=DECIMAL},
+            </if>
+            <if test="totalMoney != null">
+                total_money = #{totalMoney,jdbcType=DECIMAL},
+            </if>
+            <if test="deposit != null">
+                deposit = #{deposit,jdbcType=DECIMAL},
+            </if>
+            <if test="firstParty != null">
+                first_party = #{firstParty,jdbcType=VARCHAR},
+            </if>
+            <if test="firstPhone != null">
+                first_phone = #{firstPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="secondParty != null">
+                second_party = #{secondParty,jdbcType=VARCHAR},
+            </if>
+            <if test="secondPhone != null">
+                second_phone = #{secondPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="conStatus != null">
+                con_status = #{conStatus,jdbcType=INTEGER},
+            </if>
+            <if test="conCreateTime != null">
+                con_create_time = #{conCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="firstId != null">
+                first_id = #{firstId,jdbcType=INTEGER},
+            </if>
+            <if test="secondId != null">
+                second_id = #{secondId,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="rentoutId != null">
+                rentout_id = #{rentoutId,jdbcType=INTEGER},
+            </if>
+        </set>
+        where con_num = #{conNum,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.bean.TContract">
+        update t_contract
+        set con_address = #{conAddress,jdbcType=VARCHAR},
+        con_time = #{conTime,jdbcType=VARCHAR},
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+        pay_time = #{payTime,jdbcType=TIMESTAMP},
+        month_money = #{monthMoney,jdbcType=DECIMAL},
+        total_money = #{totalMoney,jdbcType=DECIMAL},
+        deposit = #{deposit,jdbcType=DECIMAL},
+        first_party = #{firstParty,jdbcType=VARCHAR},
+        first_phone = #{firstPhone,jdbcType=VARCHAR},
+        second_party = #{secondParty,jdbcType=VARCHAR},
+        second_phone = #{secondPhone,jdbcType=VARCHAR},
+        con_status = #{conStatus,jdbcType=INTEGER},
+        con_create_time = #{conCreateTime,jdbcType=TIMESTAMP},
+        first_id = #{firstId,jdbcType=INTEGER},
+        second_id = #{secondId,jdbcType=INTEGER},
+        user_id = #{userId,jdbcType=INTEGER},
+        rentout_id = #{rentoutId,jdbcType=INTEGER}
+        where con_num = #{conNum,jdbcType=INTEGER}
+    </update>
+</mapper>

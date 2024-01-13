@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mappers.TCountMapper">
+    <resultMap id="BaseResultMap" type="com.bean.TCount">
+        <id column="count_id" jdbcType="INTEGER" property="countId"/>
+        <result column="count_name" jdbcType="VARCHAR" property="countName"/>
+        <result column="count_num" jdbcType="INTEGER" property="countNum"/>
+        <result column="count_type" jdbcType="INTEGER" property="countType"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        count_id, count_name, count_num, count_type
+    </sql>
+    <select id="selectByExample" parameterType="com.bean.TCountExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from t_count
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_count
+        where count_id = #{countId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from t_count
+        where count_id = #{countId,jdbcType=INTEGER}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.bean.TCountExample">
+        delete from t_count
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.bean.TCount">
+        insert into t_count (count_id, count_name, count_num,
+        count_type)
+        values (#{countId,jdbcType=INTEGER}, #{countName,jdbcType=VARCHAR}, #{countNum,jdbcType=INTEGER},
+        #{countType,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" parameterType="com.bean.TCount">
+        insert into t_count
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="countId != null">
+                count_id,
+            </if>
+            <if test="countName != null">
+                count_name,
+            </if>
+            <if test="countNum != null">
+                count_num,
+            </if>
+            <if test="countType != null">
+                count_type,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="countId != null">
+                #{countId,jdbcType=INTEGER},
+            </if>
+            <if test="countName != null">
+                #{countName,jdbcType=VARCHAR},
+            </if>
+            <if test="countNum != null">
+                #{countNum,jdbcType=INTEGER},
+            </if>
+            <if test="countType != null">
+                #{countType,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.bean.TCountExample" resultType="java.lang.Long">
+        select count(*) from t_count
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update t_count
+        <set>
+            <if test="record.countId != null">
+                count_id = #{record.countId,jdbcType=INTEGER},
+            </if>
+            <if test="record.countName != null">
+                count_name = #{record.countName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.countNum != null">
+                count_num = #{record.countNum,jdbcType=INTEGER},
+            </if>
+            <if test="record.countType != null">
+                count_type = #{record.countType,jdbcType=INTEGER},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update t_count
+        set count_id = #{record.countId,jdbcType=INTEGER},
+        count_name = #{record.countName,jdbcType=VARCHAR},
+        count_num = #{record.countNum,jdbcType=INTEGER},
+        count_type = #{record.countType,jdbcType=INTEGER}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.bean.TCount">
+        update t_count
+        <set>
+            <if test="countName != null">
+                count_name = #{countName,jdbcType=VARCHAR},
+            </if>
+            <if test="countNum != null">
+                count_num = #{countNum,jdbcType=INTEGER},
+            </if>
+            <if test="countType != null">
+                count_type = #{countType,jdbcType=INTEGER},
+            </if>
+        </set>
+        where count_id = #{countId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.bean.TCount">
+        update t_count
+        set count_name = #{countName,jdbcType=VARCHAR},
+        count_num = #{countNum,jdbcType=INTEGER},
+        count_type = #{countType,jdbcType=INTEGER}
+        where count_id = #{countId,jdbcType=INTEGER}
+    </update>
+</mapper>

@@ -1,0 +1,168 @@
+.navbar a {
+    margin-top: -1px;
+}
+
+.navbar a:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+.navbar {
+    height: 55px;
+    margin-bottom: 0;
+}
+
+div.form-wrap {
+    width: 864px;
+    background: #fff;
+    margin: 37px auto 73px auto;
+    padding: 164px 0 76px 90px;
+}
+
+select.form-control {
+    border-radius: 2px;
+}
+
+.form-horizontal .control-label {
+    text-align: left;
+    padding-left: 88px;
+}
+
+.colsm3 {
+    padding-left: 0;
+}
+
+.irs {
+    width: 400px;
+}
+
+.irs-line-mid, .irs-line-left, .irs-line-right, .irs-slider {
+    background: url('../img/sprite-skin-nice.png') repeat-x;
+}
+
+.irs-diapason,
+.irs-line {
+    height: 12px;
+    top: 24px;
+}
+
+.irs-line-left,
+.irs-line-mid,
+.irs-line-right {
+    height: 12px;
+    top: -1px;
+}
+
+.irs-line-left {
+    background-position: 0 -28px;
+}
+
+.irs-line-right {
+    background-position: 100% -28px;
+}
+
+.irs-slider {
+    width: 15px;
+    background-position: -4px -90px;
+}
+
+#irs-active-slider, .irs-slider:hover {
+    background-position: -4px -120px;
+}
+
+.irs-diapason {
+    background: url('../img/sprite-skin-nice.png') repeat-x;
+    background-position: 0 -60px;
+}
+
+.irs-grid-text {
+    color: #4f5f6f;
+    bottom: -6px;
+    font-size: 13px;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.irs-grid-pol {
+    background: #000;
+    height: 11px;
+}
+
+.small {
+    display: none;
+}
+
+.bor3 {
+    border-radius: 3px;
+}
+
+.btn-primary {
+    color: #ffffff;
+    background-color: #13d2cd;
+    border-color: #13d2cd;
+}
+
+.btn-primary:hover {
+    background: #3fcbc0;
+    color: #fff;
+    border-color: transparent;
+}
+
+.btn-primary:focus, .btn-primary:active {
+    background: #3fcbc0;
+    color: #fff;
+    border-color: #3fcbc0;
+}
+
+.btn-cflat {
+    padding: 6px 40px;
+}
+
+.mt10 {
+    margin-top: 10px;
+}
+
+.mt18 {
+    margin-top: 18px;
+}
+
+.ml10 {
+    margin-left: 10px;
+}
+
+a.btn-default {
+    border-color: #fff;
+    color: #4b4b4b;
+}
+
+.btn-default:hover,
+.btn-default:focus,
+.btn-default:active {
+    border-color: #fff;
+    background: #fff;
+    color: #13d2cd;
+    box-shadow: none;
+}
+
+/*ȡ��������ʽ*/
+.unsub {
+    position: absolute;
+    left: 50%;
+    top: 100px;
+    width: auto;
+    height: auto;
+    margin-left: -55px;
+}
+
+.unsub-info .form-wrap {
+    position: relative;
+    padding-top: 254px;
+    padding-bottom: 120px;
+    padding-right: 100px;
+}
+
+.mg-38 {
+    margin-left: 38%;
+}

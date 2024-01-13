@@ -1,0 +1,317 @@
+/*!----------------------------------------
+ *
+ *
+ * Author:       zuozhu
+ * Message:      zuozhu@uoko.com 
+ *  
+ * Copyright:uoko.com 
+ *  
+----------------------------------------*/
+
+.question_list_box {
+    width: 272px;
+}
+
+.question_list_box.affix {
+    position: fixed;
+    top: 0px;
+}
+
+.question_list_box.affix-bottom {
+    position: absolute;
+}
+
+/*----------------------------------------
+         Questions 甯歌闂
+      ----------------------------------------*/
+.leftNav {
+    width: 272px;
+    float: left;
+}
+
+.rightCont {
+    float: right;
+    width: 872px;
+}
+
+.question_list_box {
+    padding: 0;
+    padding-bottom: 0;
+    z-index: 100;
+}
+
+.question_list_box .title {
+    height: 80px;
+    background: url('../img/faq-title.png') 90px 18px no-repeat;
+    color: #ffce28;
+    font-family: arial;
+    /*font-size: 60px;*/
+    text-indent: -999em;
+    overflow: hidden;
+    text-align: center;
+    margin: 0;
+}
+
+.question_list_box dd {
+    margin-left: 0;
+}
+
+.question_list_box ul li {
+    line-height: 28px;
+}
+
+.question_list_box ul li a {
+    padding: 15px 0 15px 43px;
+    line-height: 20px;
+    border-bottom: 1px solid #f5f5f5;
+    color: #454545;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-left: none;
+    margin: 0;
+    font-size: 14px;
+    display: block;
+}
+
+.question_list_box ul li a:hover,
+.question_list_box ul li a:focus {
+    background: none;
+    color: #ffce28;
+    outline: none;
+}
+
+.question_list_box ul li.active a {
+    color: #ffce28;
+    font-weight: bold;
+    font-size: 16px;
+    background: none;
+}
+
+.navwrap {
+    position: relative;
+    font-size: 16px;
+    margin-bottom: 0;
+}
+
+.navwrap dt {
+    height: 42px;
+    line-height: 42px;
+    padding-left: 26px;
+    margin-bottom: 2px;
+    background-color: #f5f5f5;
+    color: #7e7e7e;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.navwrap dt .icon {
+    float: right;
+    margin-right: 16px;
+    margin-top: 17px;
+    width: 5px;
+    height: 9px;
+    background: url('../img/faq-nav.png');
+    -webkit-transition: all .2s;
+    transition: all .2s;
+}
+
+.navwrap dt.active .icon {
+    -webkit-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+.navwrap dd {
+    display: none;
+}
+
+.question_con .title {
+    background: #f5f5f5;
+    padding: 15px 20px;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.question_con .title .i {
+    background: url('../img/questions_title.png') no-repeat;
+    width: 47px;
+    height: 44px;
+    color: #fff;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 40px;
+    text-align: center;
+}
+
+.question_con .media-box {
+    margin-top: 80px;
+}
+
+.question_con .media-box .media-body .title {
+    margin: 15px 0 5px 0;
+}
+
+.question_con .media-box .media-body .content {
+    line-height: 32px;
+    padding: 15px 30px;
+}
+
+.question_con .media-box .media-body .content p {
+    line-height: 28px;
+}
+
+/*scroll*/
+.ps-container {
+    -ms-touch-action: none;
+    touch-action: none;
+    overflow: hidden !important;
+    -ms-overflow-style: none;
+}
+
+@supports (-ms-overflow-style: none) {
+    .ps-container {
+        overflow: auto !important;
+    }
+}
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    .ps-container {
+        overflow: auto !important;
+    }
+}
+
+.ps-container.ps-active-x > .ps-scrollbar-x-rail, .ps-container.ps-active-y > .ps-scrollbar-y-rail {
+    display: block;
+    background-color: transparent;
+}
+
+.ps-container.ps-in-scrolling {
+    pointer-events: none;
+}
+
+.ps-container.ps-in-scrolling.ps-x > .ps-scrollbar-x-rail {
+    background-color: #eee;
+    opacity: .9;
+}
+
+.ps-container.ps-in-scrolling.ps-x > .ps-scrollbar-x-rail > .ps-scrollbar-x {
+    background-color: #999;
+}
+
+.ps-container.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail {
+    background-color: #eee;
+    opacity: .9;
+}
+
+.ps-container.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail > .ps-scrollbar-y {
+    background-color: #999;
+}
+
+.ps-container > .ps-scrollbar-x-rail {
+    display: none;
+    position: absolute;
+    opacity: 0;
+    -webkit-transition: background-color .2s linear, opacity .2s linear;
+    -moz-transition: background-color .2s linear, opacity .2s linear;
+    -o-transition: background-color .2s linear, opacity .2s linear;
+    transition: background-color .2s linear, opacity .2s linear;
+    bottom: 0px;
+    height: 15px;
+}
+
+.ps-container > .ps-scrollbar-x-rail > .ps-scrollbar-x {
+    position: absolute;
+    background-color: #aaa;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    -webkit-transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, -webkit-border-radius .2s ease-in-out;
+    transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, -webkit-border-radius .2s ease-in-out;
+    -moz-transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, border-radius .2s ease-in-out, -moz-border-radius .2s ease-in-out;
+    -o-transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, border-radius .2s ease-in-out;
+    transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, border-radius .2s ease-in-out;
+    transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, border-radius .2s ease-in-out, -webkit-border-radius .2s ease-in-out, -moz-border-radius .2s ease-in-out;
+    bottom: 2px;
+    height: 6px;
+}
+
+.ps-container > .ps-scrollbar-x-rail:hover > .ps-scrollbar-x, .ps-container > .ps-scrollbar-x-rail:active > .ps-scrollbar-x {
+    height: 11px;
+}
+
+.ps-container > .ps-scrollbar-y-rail {
+    display: none;
+    position: absolute;
+    opacity: 0;
+    -webkit-transition: background-color .2s linear, opacity .2s linear;
+    -moz-transition: background-color .2s linear, opacity .2s linear;
+    -o-transition: background-color .2s linear, opacity .2s linear;
+    transition: background-color .2s linear, opacity .2s linear;
+    right: 0;
+    width: 15px;
+}
+
+.ps-container > .ps-scrollbar-y-rail > .ps-scrollbar-y {
+    position: absolute;
+    background-color: #aaa;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    -webkit-transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, -webkit-border-radius .2s ease-in-out;
+    transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, -webkit-border-radius .2s ease-in-out;
+    -moz-transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, border-radius .2s ease-in-out, -moz-border-radius .2s ease-in-out;
+    -o-transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, border-radius .2s ease-in-out;
+    transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, border-radius .2s ease-in-out;
+    transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, border-radius .2s ease-in-out, -webkit-border-radius .2s ease-in-out, -moz-border-radius .2s ease-in-out;
+    right: 2px;
+    width: 6px;
+}
+
+.ps-container > .ps-scrollbar-y-rail:hover > .ps-scrollbar-y, .ps-container > .ps-scrollbar-y-rail:active > .ps-scrollbar-y {
+    width: 11px;
+}
+
+.ps-container:hover.ps-in-scrolling {
+    pointer-events: none;
+}
+
+.ps-container:hover.ps-in-scrolling.ps-x > .ps-scrollbar-x-rail {
+    background-color: #eee;
+    opacity: .9;
+}
+
+.ps-container:hover.ps-in-scrolling.ps-x > .ps-scrollbar-x-rail > .ps-scrollbar-x {
+    background-color: #999;
+}
+
+.ps-container:hover.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail {
+    background-color: #eee;
+    opacity: .9;
+}
+
+.ps-container:hover.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail > .ps-scrollbar-y {
+    background-color: #999;
+}
+
+.ps-container:hover > .ps-scrollbar-x-rail, .ps-container:hover > .ps-scrollbar-y-rail {
+    opacity: .6;
+}
+
+.ps-container:hover > .ps-scrollbar-x-rail:hover {
+    background-color: #eee;
+    opacity: .9;
+}
+
+.ps-container:hover > .ps-scrollbar-x-rail:hover > .ps-scrollbar-x {
+    background-color: #999;
+}
+
+.ps-container:hover > .ps-scrollbar-y-rail:hover {
+    background-color: #eee;
+    opacity: .9;
+}
+
+.ps-container:hover > .ps-scrollbar-y-rail:hover > .ps-scrollbar-y {
+    background-color: #999;
+}
